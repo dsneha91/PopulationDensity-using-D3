@@ -18,7 +18,7 @@ The Linux version has most of the features of the Mac and Windows versions, but 
 
 # Installing Topojson
 Topojson was updated by Mike Bostock to Geo2Topo.
-website https://bl.ocks.org/mbostock/5562380 (California Population Density)
+* website: https://bl.ocks.org/mbostock/5562380 (California Population Density)
 
 You need to install topojson by specifying the specific version by
 "sudo npm install -g topojson@1.6.27"
