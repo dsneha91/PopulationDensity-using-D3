@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf-8">
+<style>
+
+svg {
+font: 10px sans-serif;
+}
+
+.caption {
+	font-weight: bold;
+}
+
+.key path {
+display: none;
+}
+
+.key line {
+stroke: #000;
+	shape-rendering: crispEdges;
+}
+
+.county-border {
+fill: none;
+stroke: #000;
+	stroke-opacity: .3;
+}
+
+/*Color Switch styles*/
+.onoffswitch {
+position: absolute; 
+top: 180px;
+left: 400px;
+width: 100px;
+       -webkit-user-select:none; 
+       -moz-user-select:none; 
+       -ms-user-select: none;
+}
+.onoffswitch-checkbox {
+display: none;
+}
+.onoffswitch-label {
+display: block; 
+overflow: hidden; 
+cursor: pointer;
+border: 2px solid #999999; 
+	border-radius: 20px;
+}
+.onoffswitch-inner {
+display: block; 
+width: 200%; 
+       margin-left: -100%;
+transition: margin 0.3s ease-in 0s;
+}
+.onoffswitch-inner:before, .onoffswitch-inner:after {
+display: block; 
+float: left; 
+width: 50%; 
+height: 30px; 
+padding: 0; 
+	 line-height: 30px;
+	 font-size: 14px; 
+color: white; 
+       font-family: Trebuchet, Arial, sans-serif; 
+       font-weight: bold;
+       box-sizing: border-box;
+}
+.onoffswitch-inner:before {
+content: "Orange";
+	 padding-left: 10px;
+	 background-color: orange; 
+color: #FFFFFF;
+}
+.onoffswitch-inner:after {
+content: "Green";
+	 padding-right: 10px;
+	 background-color: green; 
+color: #FFFFFF;
+       text-align: right;
+}
+.onoffswitch-switch {
+display: block; width: 18px; 
+margin: 6px;
+background: #FFFFFF;
+position: absolute; top: 0; 
+bottom: 0;
+right: 63px;
+border: 2px solid #999999; 
+	border-radius: 20px;
+transition: all 0.3s ease-in 0s; 
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+	margin-left: 0;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+right: 0px; 
+}
+
+/*State Border Switch styles*/    
+.stateswitch {
+position: absolute; 
+top: 180px;
+left: 600px;
+width: 100px;
+       -webkit-user-select:none; 
+       -moz-user-select:none; 
+       -ms-user-select: none;
+}
+.stateswitch-checkbox {
+display: none;
+}
+.stateswitch-label {
+display: block; 
+overflow: hidden; 
+cursor: pointer;
+border: 2px solid #999999; 
+	border-radius: 20px;
+}
+.stateswitch-inner {
+display: block; 
+width: 200%; 
+       margin-left: -100%;
+transition: margin 0.3s ease-in 0s;
+}
+.stateswitch-inner:before, .stateswitch-inner:after {
+display: block; 
+float: left; 
+width: 50%; 
+height: 30px; 
+padding: 0; 
+	 line-height: 30px;
+	 font-size: 14px; 
+color: white; 
+       font-family: Trebuchet, Arial, sans-serif; 
+       font-weight: bold;
+       box-sizing: border-box;
+}
+.stateswitch-inner:before {
+content: "StateOn";
+	 padding-left: 10px;
+	 background-color: blue; 
+color: #FFFFFF;
+}
+.stateswitch-inner:after {
+content: "StateOff";
+	 padding-right: 10px;
+	 background-color: gray; 
+color: #FFFFFF;
+       text-align: right;
+}
+.stateswitch-switch {
+display: block; width: 18px; 
+margin: 6px;
+background: #FFFFFF;
+position: absolute; top: 0; 
+bottom: 0;
+right: 63px;
+border: 2px solid #999999; 
+	border-radius: 20px;
+transition: all 0.3s ease-in 0s; 
+}
+.stateswitch-checkbox:checked + .stateswitch-label .stateswitch-inner {
+	margin-left: 0;
+}
+.stateswitch-checkbox:checked + .stateswitch-label .stateswitch-switch {
+right: 0px; 
+}
+
+/*Census Tract Switch styles*/
+.tractswitch {
+position: absolute; 
+top: 180px;
+left: 800px;
+width: 100px;
+       -webkit-user-select:none; 
+       -moz-user-select:none; 
+       -ms-user-select: none;
+}
+.tractswitch-checkbox {
+display: none;
+}
+.tractswitch-label {
+display: block; 
+overflow: hidden; 
+cursor: pointer;
+border: 2px solid #999999; 
+	border-radius: 20px;
+}
+.tractswitch-inner {
+display: block; 
+width: 200%; 
+       margin-left: -100%;
+transition: margin 0.3s ease-in 0s;
+}
+.tractswitch-inner:before, .tractswitch-inner:after {
+display: block; 
+float: left; 
+width: 50%; 
+height: 30px; 
+padding: 0; 
+	 line-height: 30px;
+	 font-size: 14px; 
+color: white; 
+       font-family: Trebuchet, Arial, sans-serif; 
+       font-weight: bold;
+       box-sizing: border-box;
+}
+.tractswitch-inner:before {
+content: "TractOn";
+	 padding-left: 10px;
+	 background-color: blue; 
+color: #FFFFFF;
+}
+.tractswitch-inner:after {
+content: "Tractoff";
+	 padding-right: 10px;
+	 background-color: gray; 
+color: #FFFFFF;
+       text-align: right;
+}
+.tractswitch-switch {
+display: block; width: 18px; 
+margin: 6px;
+background: #FFFFFF;
+position: absolute; top: 0; 
+bottom: 0;
+right: 63px;
+border: 2px solid #999999; 
+	border-radius: 20px;
+transition: all 0.3s ease-in 0s; 
+}
+.tractswitch-checkbox:checked + .tractswitch-label .tractswitch-inner {
+	margin-left: 0;
+}
+.tractswitch-checkbox:checked + .tractswitch-label .tractswitch-switch {
+right: 0px; 
+}
+
+</style>
+<body>
+
+<h2>West Virginia Population Density, 2016</h2>
+
+<script src="https://d3js.org/d3.v3.min.js"></script>
+<script src="https://d3js.org/topojson.v1.min.js"></script>
+<script>
+
+var width = 960,
+    height = 1100;
+
+var formatNumber = d3.format(",d");
+
+	var projection = d3.geo.albers()
+	.center([0, 38.5976])   //center latitude of west virginia
+	.rotate([80.4549, 0])   //center longitude of west virginia
+	.parallels([50, 60])
+.scale(9000)
+	.translate([width / 2 , height / 2 ]);
+
+var path = d3.geo.path()
+	.projection(projection);
+
+	var color = d3.scale.threshold()
+.domain([1, 10, 50, 100, 500, 1000, 2000, 5000])
+	.range(["#fff7ec", "#fee8c8", "#fdd49e", "#fdbb84", "#fc8d59", "#ef6548", "#d7301f", "#b30000", "#7f0000"]);
+
+	//variables for keeping track of respective switch states
+	var colorSwitch = false;    
+	var stateSwitch = false;
+	var tractSwitch = false;
+
+	draw();
+
+	function changeColor() {
+		colorSwitch = !colorSwitch;
+		if (colorSwitch) {
+			color = d3.scale.threshold()
+				.domain([1, 10, 50, 100, 500, 1000, 2000, 5000])
+				.range(["#fff7ec", "#E5FFCC", "#CCFF99", "#B2FF66", "#99FF33", "#80FF00", "#66CC00", "#336600", "#336600"]);
+			console.log("goes in");
+		}
+		else {
+			color = d3.scale.threshold()
+				.domain([1, 10, 50, 100, 500, 1000, 2000, 5000])
+				.range(["#fff7ec", "#fee8c8", "#fdd49e", "#fdbb84", "#fc8d59", "#ef6548", "#d7301f", "#b30000", "#7f0000"]);
+		}
+		d3.select("svg").remove();
+		d3.select("p").remove();
+		draw();
+	}    
+
+function changeStateBoundary(){
+	stateSwitch = !stateSwitch;
+	d3.select("svg").remove();
+	d3.select("p").remove();
+	draw();
+}
+
+function changeTractBoundary(){
+	tractSwitch = !tractSwitch;
+	d3.select("svg").remove();
+	d3.select("p").remove();
+	draw();
+}
+
+//Function to Draw the svg
+function draw(){
+	var svg = d3.select("body").append("svg")
+		.attr("width", width)
+		.attr("height", height);
+	// A position encoding for the key only.
+	var x = d3.scale.linear()
+		.domain([0, 5100])
+		.range([0, 480]);
+
+	var xAxis = d3.svg.axis()
+		.scale(x)
+		.orient("bottom")
+		.tickSize(13)
+		.tickValues(color.domain())
+		.tickFormat(function(d) { return d >= 100 ? formatNumber(d) : null; });
+
+	var g = svg.append("g")
+		.attr("class", "key")
+		.attr("transform", "translate(380,40)");
+
+	g.selectAll("rect")
+		.data(color.range().map(function(d, i) {
+					return {
+x0: i ? x(color.domain()[i - 1]) : x.range()[0],
+x1: i < color.domain().length ? x(color.domain()[i]) : x.range()[1],
+z: d
+};
+}))
+.enter().append("rect")
+.attr("height", 8)
+.attr("x", function(d) { return d.x0; })
+.attr("width", function(d) { return d.x1 - d.x0; })
+.style("fill", function(d) { return d.z; });
+
+g.call(xAxis).append("text")
+.attr("class", "caption")
+.attr("y", -6)
+.text("Population per square mile");
+
+d3.json("wv.json", function(error, wv) {
+		if (error) throw error;
+
+		var tracts = topojson.feature(wv, wv.objects.tracts);
+
+		// Clip tracts to land.
+		svg.append("defs").append("clipPath")
+		.attr("id", "clip-land")
+		.append("path")
+		.datum(topojson.feature(wv, wv.objects.counties))
+		.attr("d", path);
+
+		// Group tracts by color for faster rendering.
+		svg.append("g")
+		.attr("class", "tract")
+		.attr("clip-path", "url(#clip-land)")
+		.selectAll("path")
+		.data(d3.nest()
+				.key(function(d) { return color(d.properties.population / d.properties.area * 2.58999e6); })
+				.entries(tracts.features.filter(function(d) { return d.properties.area; })))
+		.enter().append("path")
+		.style("fill", function(d) { return d.key; })
+		.attr("d", function(d) { return path({type: "FeatureCollection", features: d.values}); });
+
+		// Draw county borders.
+		svg.append("path")
+			.datum(topojson.mesh(wv, wv.objects.counties, function(a, b) { return a !== b; }))
+			.attr("class", "county-border")
+			.attr("d", path);
+
+
+
+
+		//Draw census tract borders
+		if(tractSwitch == false){
+			svg.append("path")
+			//	.datum(topojson.feature(ut, ut.objects.tracts))
+            .datum(topojson.mesh(wv, wv.objects.tracts, function(a, b) { return a !== b; }))
+				.attr("class", "county-border")
+				.attr("d", path);
+		}
+
+		//Draw state borders
+		if(stateSwitch == false){
+			svg.append("path")
+				.datum(topojson.mesh(wv, wv.objects.counties, function(a, b) { return a === b; }))
+				.attr("class", "county-border")
+				.attr("d", path);
+		}
+
+		//Append details
+		d3.select("body").append("p").html(
+				"Sneha Das <br>Instructor: Suresh Lodha <br>CMPS 165: Data programming for Visualization <br>Fall 2016");
+
+
+});
+
+}
+
+d3.select(self.frameElement).style("height", height + "px");
+
+
+</script>
+
+<!--Switch for changing color -->
+<div class="onoffswitch">
+<input type="checkbox" onclick="changeColor(this)" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+<label class="onoffswitch-label" for="myonoffswitch">
+<span class="onoffswitch-inner"></span>
+<span class="onoffswitch-switch"></span>
+</label>
+</div>
+
+<!--Switch for changing state border -->  
+<div class="stateswitch">
+<input type="checkbox" onclick="changeStateBoundary(this)" name="stateswitch" class="stateswitch-checkbox" id="mystateswitch" checked>
+<label class="stateswitch-label" for="mystateswitch">
+<span class="stateswitch-inner"></span>
+<span class="stateswitch-switch"></span>
+</label>
+</div>
+
+<!--Switch for changing cencus tract border --> 
+<div class="tractswitch">
+<input type="checkbox" onclick="changeTractBoundary(this)" name="tractswitch" class="tractswitch-checkbox" id="mytractswitch" checked>
+<label class="tractswitch-label" for="mytractswitch">
+<span class="tractswitch-inner"></span>
+<span class="tractswitch-switch"></span>
+</label>
+</div>
+
+
+</body>
+</html>
