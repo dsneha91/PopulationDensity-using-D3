@@ -33,10 +33,4 @@ By default, Brackets opens a folder containing some simple "Getting Started" con
 
 When you launch Brackets, there is a Live preview button on the top right that looks like a ~. Clicking this button automatically launches Chrome Browser where you can instantly witness the results of the HTML, CSS, Javascript, or D3 code.
 
-# Files included:
-
-
-# Dataset used: 
-
- wv.json
 
