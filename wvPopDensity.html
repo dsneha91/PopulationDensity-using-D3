@@ -244,9 +244,10 @@ right: 0px;
 
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script src="http://d3js.org/topojson.v1.min.js"></script>
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 <script>
 
-var width = 960,
+var width = 900,
     height = 1100;
 
 var formatNumber = d3.format(",d");
@@ -256,7 +257,7 @@ var formatNumber = d3.format(",d");
 	.rotate([80.4549, 0])   //center longitude of west virginia
 	.parallels([50, 60])
 .scale(9000)
-	.translate([width / 2 , height / 2 ]);
+	.translate([width / 2 + 50 , height / 2 + 50]);
 
 var path = d3.geo.path()
 	.projection(projection);
@@ -395,9 +396,7 @@ d3.json("wv.json", function(error, wv) {
 				.attr("d", path);
 		}
 
-		//Append details
-		d3.select("body").append("p").html(
-				"Created by Sneha Das");
+		
 
 
 });
@@ -436,6 +435,6 @@ d3.select(self.frameElement).style("height", height + "px");
 </label>
 </div>
 
-
+ <p><strong>Created by: </strong>Sneha Das</p>
 </body>
 </html>
