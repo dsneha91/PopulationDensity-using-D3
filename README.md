@@ -1,8 +1,16 @@
+<<<<<<< HEAD
 # RegionalPopulation
 
 Population density map of one of the 49 states of the United States (other than California) for the latest year the data is available on US Census using D3-Data Driven Documents.
 
 Along	the	x-axis	is GDP	in	Trillions	of	US	Dollars	.	Along	the	y-axis	is	EPC	(Energy	Consumption	per	Capita)	in	Million	BTUs	per	person. The	scatterplot	itself	is	a	(x,y)	placement	of	15 countries,	where	each	country	is	drawn	as	a	circle	with	area	proportional	to	total	(total	energy	consumption)	in	Trillion	BTUs obtained	by	multiplying	EPC	with Population.	All	the	data	pertains	to	the	year	2010.	
+=======
+# PopulationDensity-using-D3
+
+Population density map of one of the 49 states of the United States (other than California) for the latest year the data is available on US Census using D3-Data Driven Documents.
+
+Along the x-axis is GDP in Trillions of US Dollars . Along the y-axis is EPC (Energy Consumption per Capita) in Million BTUs per person. The scatterplot itself is a (x,y) placement of 15 countries, where each country is drawn as a circle with area proportional to total (total energy consumption) in Trillion BTUs obtained by multiplying EPC with Population. All the data pertains to the year 2010.
+>>>>>>> 297bdeba4e890025a7860f664db0e5882682ad2a
 
 # Introduction to D3:
 
@@ -17,11 +25,19 @@ Installers for the latest stable build for Mac, Windows and Linux (Debian/Ubuntu
 The Linux version has most of the features of the Mac and Windows versions, but is still missing a few things. See the Linux wiki page for a list of known issues and to find out how you can help.
 
 # Installing Topojson
+<<<<<<< HEAD
 Topojson was updated by Mike Bostock to Geo2Topo.
 * website: https://bl.ocks.org/mbostock/5562380 (California Population Density)
 
 You need to install topojson by specifying the specific version by
 "sudo npm install -g topojson@1.6.27"
+=======
+
+Topojson was updated by Mike Bostock to Geo2Topo.
+
+website: https://bl.ocks.org/mbostock/5562380 (California Population Density)
+You need to install topojson by specifying the specific version by "sudo npm install -g topojson@1.6.27"
+>>>>>>> 297bdeba4e890025a7860f664db0e5882682ad2a
 
 # Usage
 
@@ -32,5 +48,8 @@ By default, Brackets opens a folder containing some simple "Getting Started" con
 # To run the code:
 
 When you launch Brackets, there is a Live preview button on the top right that looks like a ~. Clicking this button automatically launches Chrome Browser where you can instantly witness the results of the HTML, CSS, Javascript, or D3 code.
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 297bdeba4e890025a7860f664db0e5882682ad2a
