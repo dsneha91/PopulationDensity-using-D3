@@ -5,28 +5,44 @@
 
 svg {
 font: 10px sans-serif;
+background-color:floralwhite;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+
 }
 
 .caption {
 	font-weight: bold;
 }
 
-.key path {
+.legend path {
 display: none;
 }
 
-.key line {
+.legend line {
 stroke: #000;
 	shape-rendering: crispEdges;
 }
 
 .county-border {
-fill: none;
-stroke: #000;
+    fill: none;
+    stroke: #000;
 	stroke-opacity: .3;
 }
 
-/*Color Switch styles*/
+    
+h1 { 
+    color: black; 
+    font-family: sans-serif; 
+    font-size: 40px; 
+    font-weight: 800; 
+    line-height: 50px; 
+    margin: 0 0 24px; 
+    text-align: left; 
+     
+}
+
 .onoffswitch {
 position: absolute; 
 top: 180px;
@@ -97,7 +113,7 @@ right: 0px;
 }
 
 /*State Border Switch styles*/    
-.stateswitch {
+.hasStateBorder {
 position: absolute; 
 top: 180px;
 left: 600px;
@@ -106,23 +122,23 @@ width: 100px;
        -moz-user-select:none; 
        -ms-user-select: none;
 }
-.stateswitch-checkbox {
+.hasStateBorder-checkbox {
 display: none;
 }
-.stateswitch-label {
+.hasStateBorder-label {
 display: block; 
 overflow: hidden; 
 cursor: pointer;
 border: 2px solid #999999; 
 	border-radius: 20px;
 }
-.stateswitch-inner {
+.hasStateBorder-inner {
 display: block; 
 width: 200%; 
        margin-left: -100%;
 transition: margin 0.3s ease-in 0s;
 }
-.stateswitch-inner:before, .stateswitch-inner:after {
+.hasStateBorder-inner:before, .hasStateBorder-inner:after {
 display: block; 
 float: left; 
 width: 50%; 
@@ -135,20 +151,20 @@ color: white;
        font-weight: bold;
        box-sizing: border-box;
 }
-.stateswitch-inner:before {
+.hasStateBorder-inner:before {
 content: "StateOn";
 	 padding-left: 10px;
 	 background-color: blue; 
 color: #FFFFFF;
 }
-.stateswitch-inner:after {
+.hasStateBorder-inner:after {
 content: "StateOff";
 	 padding-right: 10px;
 	 background-color: gray; 
 color: #FFFFFF;
        text-align: right;
 }
-.stateswitch-switch {
+.hasStateBorder-switch {
 display: block; width: 18px; 
 margin: 6px;
 background: #FFFFFF;
@@ -159,15 +175,15 @@ border: 2px solid #999999;
 	border-radius: 20px;
 transition: all 0.3s ease-in 0s; 
 }
-.stateswitch-checkbox:checked + .stateswitch-label .stateswitch-inner {
+.hasStateBorder-checkbox:checked + .hasStateBorder-label .hasStateBorder-inner {
 	margin-left: 0;
 }
-.stateswitch-checkbox:checked + .stateswitch-label .stateswitch-switch {
+.hasStateBorder-checkbox:checked + .hasStateBorder-label .hasStateBorder-switch {
 right: 0px; 
 }
 
 /*Census Tract Switch styles*/
-.tractswitch {
+.hasTractBorder {
 position: absolute; 
 top: 180px;
 left: 800px;
@@ -176,23 +192,23 @@ width: 100px;
        -moz-user-select:none; 
        -ms-user-select: none;
 }
-.tractswitch-checkbox {
+.hasTractBorder-checkbox {
 display: none;
 }
-.tractswitch-label {
+.hasTractBorder-label {
 display: block; 
 overflow: hidden; 
 cursor: pointer;
 border: 2px solid #999999; 
 	border-radius: 20px;
 }
-.tractswitch-inner {
+.hasTractBorder-inner {
 display: block; 
 width: 200%; 
        margin-left: -100%;
 transition: margin 0.3s ease-in 0s;
 }
-.tractswitch-inner:before, .tractswitch-inner:after {
+.hasTractBorder-inner:before, .hasTractBorder-inner:after {
 display: block; 
 float: left; 
 width: 50%; 
@@ -205,20 +221,20 @@ color: white;
        font-weight: bold;
        box-sizing: border-box;
 }
-.tractswitch-inner:before {
+.hasTractBorder-inner:before {
 content: "TractOn";
 	 padding-left: 10px;
 	 background-color: blue; 
 color: #FFFFFF;
 }
-.tractswitch-inner:after {
+.hasTractBorder-inner:after {
 content: "Tractoff";
 	 padding-right: 10px;
 	 background-color: gray; 
 color: #FFFFFF;
        text-align: right;
 }
-.tractswitch-switch {
+.hasTractBorder-switch {
 display: block; width: 18px; 
 margin: 6px;
 background: #FFFFFF;
@@ -229,187 +245,21 @@ border: 2px solid #999999;
 	border-radius: 20px;
 transition: all 0.3s ease-in 0s; 
 }
-.tractswitch-checkbox:checked + .tractswitch-label .tractswitch-inner {
+.hasTractBorder-checkbox:checked + .hasTractBorder-label .hasTractBorder-inner {
 	margin-left: 0;
 }
-.tractswitch-checkbox:checked + .tractswitch-label .tractswitch-switch {
+.hasTractBorder-checkbox:checked + .hasTractBorder-label .hasTractBorder-switch {
 right: 0px; 
 }
 
 </style>
 <body>
 
-<h2>West Virginia Population Density, 2016</h2>
-
-<script src="https://d3js.org/d3.v3.min.js"></script>
-<script src="https://d3js.org/topojson.v1.min.js"></script>
-<script>
-
-var width = 960,
-    height = 1100;
-
-var formatNumber = d3.format(",d");
-
-	var projection = d3.geo.albers()
-	.center([0, 38.5976])   //center latitude of west virginia
-	.rotate([80.4549, 0])   //center longitude of west virginia
-	.parallels([50, 60])
-.scale(9000)
-	.translate([width / 2 , height / 2 ]);
-
-var path = d3.geo.path()
-	.projection(projection);
-
-	var color = d3.scale.threshold()
-.domain([1, 10, 50, 100, 500, 1000, 2000, 5000])
-	.range(["#fff7ec", "#fee8c8", "#fdd49e", "#fdbb84", "#fc8d59", "#ef6548", "#d7301f", "#b30000", "#7f0000"]);
-
-	//variables for keeping track of respective switch states
-	var colorSwitch = false;    
-	var stateSwitch = false;
-	var tractSwitch = false;
-
-	draw();
-
-	function changeColor() {
-		colorSwitch = !colorSwitch;
-		if (colorSwitch) {
-			color = d3.scale.threshold()
-				.domain([1, 10, 50, 100, 500, 1000, 2000, 5000])
-				.range(["#fff7ec", "#E5FFCC", "#CCFF99", "#B2FF66", "#99FF33", "#80FF00", "#66CC00", "#336600", "#336600"]);
-			console.log("goes in");
-		}
-		else {
-			color = d3.scale.threshold()
-				.domain([1, 10, 50, 100, 500, 1000, 2000, 5000])
-				.range(["#fff7ec", "#fee8c8", "#fdd49e", "#fdbb84", "#fc8d59", "#ef6548", "#d7301f", "#b30000", "#7f0000"]);
-		}
-		d3.select("svg").remove();
-		d3.select("p").remove();
-		draw();
-	}    
-
-function changeStateBoundary(){
-	stateSwitch = !stateSwitch;
-	d3.select("svg").remove();
-	d3.select("p").remove();
-	draw();
-}
-
-function changeTractBoundary(){
-	tractSwitch = !tractSwitch;
-	d3.select("svg").remove();
-	d3.select("p").remove();
-	draw();
-}
-
-//Function to Draw the svg
-function draw(){
-	var svg = d3.select("body").append("svg")
-		.attr("width", width)
-		.attr("height", height);
-	// A position encoding for the key only.
-	var x = d3.scale.linear()
-		.domain([0, 5100])
-		.range([0, 480]);
-
-	var xAxis = d3.svg.axis()
-		.scale(x)
-		.orient("bottom")
-		.tickSize(13)
-		.tickValues(color.domain())
-		.tickFormat(function(d) { return d >= 100 ? formatNumber(d) : null; });
-
-	var g = svg.append("g")
-		.attr("class", "key")
-		.attr("transform", "translate(380,40)");
-
-	g.selectAll("rect")
-		.data(color.range().map(function(d, i) {
-					return {
-x0: i ? x(color.domain()[i - 1]) : x.range()[0],
-x1: i < color.domain().length ? x(color.domain()[i]) : x.range()[1],
-z: d
-};
-}))
-.enter().append("rect")
-.attr("height", 8)
-.attr("x", function(d) { return d.x0; })
-.attr("width", function(d) { return d.x1 - d.x0; })
-.style("fill", function(d) { return d.z; });
-
-g.call(xAxis).append("text")
-.attr("class", "caption")
-.attr("y", -6)
-.text("Population per square mile");
-
-d3.json("wv.json", function(error, wv) {
-		if (error) throw error;
-
-		var tracts = topojson.feature(wv, wv.objects.tracts);
-
-		// Clip tracts to land.
-		svg.append("defs").append("clipPath")
-		.attr("id", "clip-land")
-		.append("path")
-		.datum(topojson.feature(wv, wv.objects.counties))
-		.attr("d", path);
-
-		// Group tracts by color for faster rendering.
-		svg.append("g")
-		.attr("class", "tract")
-		.attr("clip-path", "url(#clip-land)")
-		.selectAll("path")
-		.data(d3.nest()
-				.key(function(d) { return color(d.properties.population / d.properties.area * 2.58999e6); })
-				.entries(tracts.features.filter(function(d) { return d.properties.area; })))
-		.enter().append("path")
-		.style("fill", function(d) { return d.key; })
-		.attr("d", function(d) { return path({type: "FeatureCollection", features: d.values}); });
-
-		// Draw county borders.
-		svg.append("path")
-			.datum(topojson.mesh(wv, wv.objects.counties, function(a, b) { return a !== b; }))
-			.attr("class", "county-border")
-			.attr("d", path);
-
-
-
-
-		//Draw census tract borders
-		if(tractSwitch == false){
-			svg.append("path")
-			//	.datum(topojson.feature(ut, ut.objects.tracts))
-            .datum(topojson.mesh(wv, wv.objects.tracts, function(a, b) { return a !== b; }))
-				.attr("class", "county-border")
-				.attr("d", path);
-		}
-
-		//Draw state borders
-		if(stateSwitch == false){
-			svg.append("path")
-				.datum(topojson.mesh(wv, wv.objects.counties, function(a, b) { return a === b; }))
-				.attr("class", "county-border")
-				.attr("d", path);
-		}
-
-		//Append details
-		d3.select("body").append("p").html(
-				"Sneha Das <br>Instructor: Suresh Lodha <br>CMPS 165: Data programming for Visualization <br>Fall 2016");
-
-
-});
-
-}
-
-d3.select(self.frameElement).style("height", height + "px");
-
-
-</script>
+<h1>West Virginia Population Density</h1>
 
 <!--Switch for changing color -->
 <div class="onoffswitch">
-<input type="checkbox" onclick="changeColor(this)" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+<input type="checkbox" onclick="updateColor(this)" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
 <label class="onoffswitch-label" for="myonoffswitch">
 <span class="onoffswitch-inner"></span>
 <span class="onoffswitch-switch"></span>
@@ -417,23 +267,266 @@ d3.select(self.frameElement).style("height", height + "px");
 </div>
 
 <!--Switch for changing state border -->  
-<div class="stateswitch">
-<input type="checkbox" onclick="changeStateBoundary(this)" name="stateswitch" class="stateswitch-checkbox" id="mystateswitch" checked>
-<label class="stateswitch-label" for="mystateswitch">
-<span class="stateswitch-inner"></span>
-<span class="stateswitch-switch"></span>
+<div class="hasStateBorder">
+<input type="checkbox" onclick="updateStateBorder(this)" name="hasStateBorder" class="hasStateBorder-checkbox" id="mystateswitch" checked>
+<label class="hasStateBorder-label" for="mystateswitch">
+<span class="hasStateBorder-inner"></span>
+<span class="hasStateBorder-switch"></span>
 </label>
 </div>
 
 <!--Switch for changing cencus tract border --> 
-<div class="tractswitch">
-<input type="checkbox" onclick="changeTractBoundary(this)" name="tractswitch" class="tractswitch-checkbox" id="mytractswitch" checked>
-<label class="tractswitch-label" for="mytractswitch">
-<span class="tractswitch-inner"></span>
-<span class="tractswitch-switch"></span>
+<div class="hasTractBorder">
+<input type="checkbox" onclick="updateTractBorder(this)" name="hasTractBorder" class="hasTractBorder-checkbox" id="mytractswitch" checked>
+<label class="hasTractBorder-label" for="mytractswitch">
+<span class="hasTractBorder-inner"></span>
+<span class="hasTractBorder-switch"></span>
 </label>
 </div>
 
+<script src="https://d3js.org/d3.v3.min.js"></script>
+<script src="https://d3js.org/topojson.v1.min.js"></script>
+<script>
+
+var width = 960,
+    height = 1100,
+    legendX = 30,
+    legendY = 145,
+    legendHeight = 8;
+
+var projection = d3.geo.albers()
+                .center([0, 38.5976])   //center latitude of west virginia
+	.rotate([80.4549, 0])
+                .parallels([50, 60])
+                .scale(8000)
+                .translate([width / 2 , height / 2 ]);
+
+var path = d3.geo.path()
+        	.projection(projection);
+
+var color = d3.scale.threshold()
+            .domain([1, 10, 50, 100, 500, 1000, 2000, 5000])
+            .range(["#fff7ec", "#fee8c8", "#fdd49e", "#fdbb84", "#fc8d59", "#ef6548", "#d7301f", "#b30000", "#7f0000"]);
+
+//Create the main SVG element
+var svg = d3.select("body").append("svg")
+		.attr("width", width)
+		.attr("height", height);  
+
+
+//Flags for each button
+var isAlterColor = false;    
+var hasStateBorder = true;
+var hasTractBorder = true;
+
+// Event handler for "Change Color" button
+function updateColor() {
+    //update the flag
+    isAlterColor = !isAlterColor;
+    //update the color scale's range
+    if (isAlterColor) {
+        color.range(["#fff7ec", "#E5FFCC", "#CCFF99", "#B2FF66", "#99FF33", "#80FF00", "#66CC00", "#336600", "#336600"]);
+    }
+    else {
+        color.range(["#fff7ec", "#fee8c8", "#fdd49e", "#fdbb84", "#fc8d59", "#ef6548", "#d7301f", "#b30000", "#7f0000"]);
+    }
+    
+    //update the color of each tract shape
+    d3.select(".tract").selectAll("path")
+    .data(d3.nest()
+            .key(function(d) { return color(d.properties.population / d.properties.area * 2.58999e6); })
+            .entries(tracts.features.filter(function(d) { return d.properties.area; })))
+    .style("fill", function(d) { return d.key; });
+    
+
+    //update the color of the legend bar
+    legend.selectAll("rect")
+		.data(color.range().map(function(d, i) {
+            return { z: d };
+            }))
+        .style("fill", function(d) { return d.z; });
+}    
+
+    
+// Event handler for "State borders ON/OFF" button    
+function updateStateBorder(){
+    //update the flag
+	hasStateBorder = !hasStateBorder;
+    
+    //update the visibility of state borders
+    if (hasStateBorder){
+        d3.select(".state-border").attr("stroke", "#000");
+    }
+    else{
+        d3.select(".state-border").attr("stroke", "none");
+    }
+}
+
+// Event handler for "Tract borders ON/OFF" button  
+function updateTractBorder(){
+	//update the flag
+    hasTractBorder = !hasTractBorder;
+    
+    //update the visibility of tract borders
+    if (hasTractBorder){
+        d3.select(".tract-border").attr("stroke", "#000");
+    }
+    else{
+        d3.select(".tract-border").attr("stroke", "none");
+    }
+    
+}
+
+// Function to plot the legend
+var legend = {} //predefined the legend variable for updateColor function to use it
+function plotLegend(){
+    
+    var formatNumber = d3.format(",d");    
+    // A position encoding for the legend only.
+    var x = d3.scale.linear()
+        .domain([0, 5100])
+        .range([0, 480]);
+
+    var xAxis = d3.svg.axis()
+        .scale(x)
+        .orient("bottom")
+        .tickSize(13)
+        .tickValues(color.domain())
+        .tickFormat(function(d) { return d >= 100 ? formatNumber(d) : null; });    
+    
+    //group for legend
+    legend = svg.append("g")
+        .attr("class", "legend")
+        .attr("transform", "translate(" + legendX + "," + legendY + ")");
+
+    // Draw legends notations
+    legend.call(xAxis).append("text")
+        .attr("class", "caption")
+        .attr("y", -6)
+        .text("Population per square mile");  
+    
+    // Plot or re-plot legend bar
+	legend.selectAll("rect")
+		.data(color.range().map(function(d, i) {
+            return {
+                x0: i ? x(color.domain()[i - 1]) : x.range()[0],
+                x1: i < color.domain().length ? x(color.domain()[i]) : x.range()[1],
+                z: d
+                };
+            }))
+        .enter().append("rect")
+        .attr("height", legendHeight)
+        .attr("x", function(d) { return d.x0; })
+        .attr("width", function(d) { return d.x1 - d.x0; })
+        .style("fill", function(d) { return d.z; });
+}
+    
+//Declare the tracts feature for future use.
+// this variable would be filled when we are plotting initial graph
+var tracts = {}
+
+    
+// Function to plot all tract shapes, applying the clipPath. 
+function plotByTracts(){
+        
+    // Group tracts by color for faster rendering.
+    svg.append("g")
+    .attr("class", "tract")
+    .attr("clip-path", "url(#clip-land)")
+    .selectAll("path")
+    .data(d3.nest()
+            .key(function(d) {return color(d.properties.population / d.properties.area * 2.58999e6); })
+            .entries(tracts.features.filter(function(d) { return d.properties.area; })))
+    .enter().append("path")
+    .style("fill", function(d) { return d.key; })
+    .attr("d", function(d) { return path({type: "FeatureCollection", features: d.values}); });
+}
+
+// Function to plot county borders.
+function plotCountyBorder(state){
+    // Plot county borders, always.
+    svg.append("path")
+        .datum(topojson.mesh(state, state.objects.counties, function(a, b) { return a !== b; }))
+        .attr("class", "county-border")
+        .attr("d", path);
+}
+
+// Function to plot tract borders.
+function plotTractBorder(state){
+    // Plot census tract borders.
+    svg.append("path")
+        .datum(topojson.mesh(state, state.objects.tracts, function(a, b) { return a !== b; }))
+        .attr("class", "tract-border")
+        .attr("fill", "none")
+        .attr("stroke", "#000")
+        .attr("stroke-opacity", ".3")
+        .attr("d", path);
+}   
+    
+// Function to plot state border.
+function plotStateBorder(state){
+    // Plot state border, on conditoin.
+    svg.append("path")
+        .datum(topojson.mesh(state, state.objects.counties, function(a, b) { return a === b; }))
+        .attr("class", "state-border")
+        .attr("fill", "none")
+        .attr("stroke", "#000")
+        .attr("stroke-opacity", ".3")
+        .attr("d", path);
+    
+}
+    
+// Function to define the ClipPath. It will be called only once, when we plot the initial graph
+function defineClipPath(state){
+    // Define a clipPath, in order to clip tracts to land (off ocean/water).
+    svg.append("defs").append("clipPath")
+    .attr("id", "clip-land")
+    .append("path")
+    .datum(topojson.feature(state, state.objects.counties))
+    .attr("d", path);
+}
+    
+    
+    
+//Get data from wv.json file, and plot the initial graph
+d3.json("wv.json", function(error, wv) {
+    if (error) throw error;
+    
+    //filled the tracts variable
+    tracts = topojson.feature(wv, wv.objects.tracts);
+    
+    // plot the main map
+    defineClipPath(wv);
+    plotByTracts();
+    plotCountyBorder(wv);
+    plotTractBorder(wv);
+    plotStateBorder(wv);
+    
+    // plot the legend. plotLegend does not depend on nc.json.
+    // we put it here is merely to wait for main graph to be plotted first
+    plotLegend();
+});
+    
+// Add author info
+var info = svg.append('g').attr("class", "authorInfo")
+            .attr("transform", "translate(" + legendX + "," + legendY + ")")
+            .attr("font-family", "Tahoma, Geneva, sans-serif")
+            .attr("font-size", "15px")
+            .attr("fill", "black");
+info.append("text")
+    .text("Sneha Das")
+    .attr("y",750);
+info.append("text")
+    .text("Instructor: Suresh Lodha")
+    .attr("y",770);
+info.append("text")
+    .text("Fall 2016")
+    .attr("y",790);
+    
+// adjust frame height
+d3.select(self.frameElement).style("height", height + "px");
+
+</script>
 
 </body>
 </html>
